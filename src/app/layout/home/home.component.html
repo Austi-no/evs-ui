@@ -1,0 +1,22 @@
+<div id="page-container" class="sidebar-o sidebar-inverse enable-page-overlay side-scroll page-header-fixed">
+
+  <!-- <ngx-shimmer-loading [shape]="'square'" [width]="'100%'"></ngx-shimmer-loading> -->
+
+  <app-sidebar></app-sidebar>
+
+  <app-header></app-header>
+
+  <!-- Main Container -->
+  <main id="main-container">
+    <!-- Page Content -->
+    <div class="container-fluid">
+      <router-outlet></router-outlet>
+    </div>
+
+    <!-- END Page Content -->
+  </main>
+  <!-- END Main Container -->
+
+  <app-footer></app-footer>
+
+</div>

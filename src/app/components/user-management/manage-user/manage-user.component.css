@@ -1,0 +1,9 @@
+.header {
+  position: sticky;
+  top:0;
+}
+.container-fluid {
+  /* width: 600px;
+  height: 300px; */
+  overflow: auto;
+}

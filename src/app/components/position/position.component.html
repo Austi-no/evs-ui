@@ -1,0 +1,60 @@
+<nav aria-label="breadcrumb mt-3">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#">Home</a></li>
+    <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Position</li>
+  </ol>
+</nav>
+
+<form class="form-inline" [formGroup]="form">
+  <div class="form-group mx-sm-3 mb-0">
+    <label class="sr-only">Title</label>
+    <input type="text" class="form-control " formControlName="title" placeholder="Title">
+  </div>
+  <div class="form-group mx-sm-3 mb-0">
+    <label class="sr-only">Description</label>
+    <input type="text" class="form-control " formControlName="description" placeholder="Description">
+  </div>
+
+  <div class="form-group mx-sm-3 mb-0">
+    <label class="sr-only">Priority Level</label>
+    <select class="form-control" formControlName="priorityLevel">
+      <option selected value="Select Priority Level">Select Priority Level</option>
+      <option *ngFor="let list of priorities" value={{list.priorityLevel}}>
+        {{list.priorityLevel}}
+      </option>
+
+    </select>
+  </div>
+
+  <button class="btn  btn-primary" (click)="addPosition()"><i class="fa fa-plus-square"></i> Add Position</button>
+</form>
+
+<div class="container-fluid table-responsive mt-4">
+  <table class="table">
+    <thead style="position: sticky;top: 0" class="thead-light">
+      <tr>
+        <th class="header" scope="col">#</th>
+        <th class="header" scope="col">Position Title</th>
+        <th class="header" scope="col">Description</th>
+        <th class="header" scope="col">Priority</th>
+        <th class="header" scope="col">Date Created</th>
+        <th class="header" scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let list of positionList;let i=index">
+        <td>{{1+i}}</td>
+        <td> <strong><u>{{list.title | uppercase}}</u></strong> </td>
+        <td>{{list.description}}</td>
+        <td>{{list.priorityLevel?.priorityLevel}}</td>
+        <td>{{list.dateCreated|date}}</td>
+        <td>
+
+          <button (click)="deleteById(list.id)" class="btn btn-sm btn-danger ml-4"><i class="fa fa-trash"></i></button>
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+</div>

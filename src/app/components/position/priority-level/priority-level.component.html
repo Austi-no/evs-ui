@@ -1,0 +1,40 @@
+<nav aria-label="breadcrumb mt-3">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#">Home</a></li>
+    <li class="breadcrumb-item"><a href="#">Manage Position</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Priority Level</li>
+  </ol>
+</nav>
+
+<form class="form-inline" [formGroup]="form">
+  <div class="form-group mx-sm-3 mb-2">
+    <label class="sr-only">Priority Level</label>
+    <input type="text" class="form-control form-control" formControlName="priorityLevel" placeholder="e.g 001">
+  </div>
+  <button class="btn  btn-primary" (click)="addPriorityLevel()"><i class="fa fa-plus-square"></i> Add Priority</button>
+</form>
+
+<div class="container-fluid table-responsive mt-4">
+  <table class="table">
+    <thead style="position: sticky;top: 0" class="thead-light">
+      <tr>
+        <th class="header" scope="col">#</th>
+        <th class="header" scope="col">Priority Level</th>
+        <th class="header" scope="col">Date Created</th>
+        <th class="header" scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let list of priorities;let i=index">
+        <td>{{1+i}}</td>
+        <td>{{list.priorityLevel}}</td>
+        <td>{{list.dateCreated|date}}</td>
+        <td>
+
+          <button (click)="deleteById(list.id)" class="btn btn-sm btn-danger ml-4"><i class="fa fa-trash"></i></button>
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+</div>

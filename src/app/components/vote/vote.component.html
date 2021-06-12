@@ -1,0 +1,76 @@
+<nav aria-label="breadcrumb mt-3">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#">Home</a></li>
+    <li class="breadcrumb-item"><a href="#">Vote</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Cast Vote</li>
+  </ol>
+</nav>
+
+
+<div class="container">
+  <form class="form-inline">
+    <div class="form-group mx-sm-3 mb-0">
+      <label class="sr-only">Select Position</label>
+      <select class="form-control" name="selectedPosition" [(ngModel)]="selectedPosition">
+        <option selected>Select Position</option>
+        <option *ngFor="let list of positionList" value={{list.title}}>
+          {{list.title}}
+        </option>
+      </select>
+    </div>
+
+    <button class="btn  btn-primary" (click)="selectPosition()"><i class="fa fa-search"></i> Fetch Candidates</button>
+  </form>
+
+  <div class="container-fluid" *ngIf="selectedPositionCandidate.length<=0">
+    <div class="row">
+      <div class="col-sm-6 offset-sm-3 mt-4 mb-4">
+        <h2 class="text-center">{{selectedPosition}}</h2>
+        <p class="text-center">Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4" *ngFor="let list of candidates ">
+        <div class="card-box text-center">
+          <div class="user-pic">
+            <img src="{{list.image}}" class="img-fluid" alt="User Pic" />
+          </div>
+          <h4>{{list.user?.firstName}} {{list.user?.lastName}}</h4>
+          <h6><span class="badge badge-success p-2">{{list.position?.title}}</span></h6>
+          <hr />
+          <p>{{list.manifesto}}</p>
+          <hr />
+          <a (click)="vote(list)" class="btn btn-primary"><i class="fa fa-thumbs-up mr-3"></i>Vote</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid" *ngIf="selectedPositionCandidate.length>0">
+    <div class="row">
+      <div class="col-sm-6 offset-sm-3 mt-4 mb-4">
+        <h2 class="text-center">{{selectedPosition}}</h2>
+        <p class="text-center">Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4" *ngFor="let list of selectedPositionCandidate ">
+        <div class="card-box text-center">
+          <div class="user-pic">
+            <img src="{{list.image}}" class="img-fluid" alt="User Pic" />
+          </div>
+          <h4>{{list.user?.firstName}} {{list.user?.lastName}}</h4>
+          <h6><span class="badge badge-success p-2">{{list.position?.title}}</span></h6>
+          <hr />
+          <p>{{list.manifesto}}</p>
+          <hr />
+          <a (click)="vote(list)" class="btn btn-primary"><i class="fa fa-thumbs-up mr-3"></i>Vote</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>

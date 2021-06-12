@@ -1,0 +1,43 @@
+<nav aria-label="breadcrumb mt-3">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#">Home</a></li>
+    <li class="breadcrumb-item"><a href="#">User Management</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Users</li>
+  </ol>
+</nav>
+
+
+<div class="container-fluid table-responsive mt-4">
+  <table class="table">
+    <thead style="position: sticky;top: 0" class="thead-light">
+      <tr>
+        <th class="header" scope="col">#</th>
+        <th class="header" scope="col">Mat No</th>
+        <th class="header" scope="col">First Name</th>
+        <th class="header" scope="col">Last Name</th>
+        <th class="header" scope="col">Phone</th>
+        <th class="header" scope="col">Email</th>
+        <th class="header" scope="col">Faculty</th>
+        <th class="header" scope="col">Date Created</th>
+        <th class="header" scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let list of userList;let i=index">
+        <td>{{1+i}}</td>
+        <td><strong><u>{{list.matNo}}</u> </strong> </td>
+        <td>{{list.firstName}}</td>
+        <td>{{list.lastName}}</td>
+        <td>{{list.phone}}</td>
+        <td>{{list.email}}</td>
+        <td>{{list.faculty?.name}}</td>
+        <td>{{list.dateCreated|date}}</td>
+        <td>
+          <button class="btn btn-sm btn-success ml-4"><i class="fa fa-edit"></i></button>
+          <button (click)="deleteById(list.id)" class="btn btn-sm btn-danger ml-4"><i class="fa fa-trash"></i></button>
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+</div>

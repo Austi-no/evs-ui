@@ -1,0 +1,200 @@
+<nav aria-label="breadcrumb mt-3">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#">Home</a></li>
+    <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Candidate</li>
+  </ol>
+</nav>
+
+<p>
+  <button class="btn  btn-light" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false"
+    aria-controls="collapseExample"><i class="fa fa-plus-square"></i> Add Candidate</button>
+</p>
+<div class="collapse" id="collapseExample">
+  <div class="row">
+    <div class="col-6">
+      <div class="card card-body">
+        <form class="form-inline">
+
+          <div class="form-group mx-sm-3 mb-0">
+            <label class="sr-only">Mat No</label>
+            <input type="text" class="form-control " name="matNo" [(ngModel)]="matNo"
+              placeholder="Enter Candidate Matric. No">
+          </div>
+          <button class="btn  btn-primary" (click)="searchCandidate()"><i class="fa fa-search"></i> Search</button>
+        </form>
+
+        <hr>
+        <form [formGroup]="form" *ngIf="foundUser">
+          <div class="col-md-12">
+            <div class="mb-3">
+              <label class="form-label">Matriculation Number <span class="text-danger">*</span></label>
+              <div class="form-icon position-relative">
+                <input type="text" class="form-control" value="{{userData?.matNo}}" disabled>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <div class="mb-3">
+              <label class="form-label">Full Name <span class="text-danger">*</span></label>
+              <div class="form-icon position-relative">
+                <input type="text" class="form-control" value="{{userData?.firstName}} {{userData?.lastName}}" disabled>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col-md-12">
+            <div class="mb-3">
+              <label class="form-label">Postion <span class="text-danger">*</span></label>
+              <div class="form-icon position-relative">
+                <select class="form-control" formControlName="position">
+                  <option selected value="Select Position">Select Position</option>
+                  <option *ngFor="let list of positionList" value={{list.title}}>
+                    {{list.title}}
+                  </option>
+
+                </select>
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class="col-md-12">
+            <div class="mb-3">
+              <label class="form-label">Manifestos <span class="text-danger">*</span></label>
+              <div class="form-icon position-relative">
+                <textarea class="form-control" rows="2" formControlName="manifesto"></textarea>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col-md-12">
+            <div class="mb-3">
+              <input type="file" name="img[]" class="file" accept="image/*">
+              <div class="input-group my-3">
+                <input type="text" class="form-control" disabled placeholder="Upload Photo" id="file">
+                <div class="input-group-append">
+                  <button type="button" class="browse btn btn-primary">Browse...</button>
+                </div>
+              </div>
+              <label>Preview</label>
+              <hr>
+              <img src="https://placehold.it/80x80" id="preview" class="img-thumbnail">
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <div class="mb-3">
+              <button class="btn btn-block btn-primary" (click)="addCandidate()"><i class="fa fa-plus-circle"></i>
+                Add
+                Candidate</button>
+            </div>
+          </div>
+
+
+
+        </form>
+
+
+
+      </div>
+    </div>
+    <div class="col-6" *ngIf="foundUser">
+      <div class="card card-body">
+        <div class="container-fluid mt-4">
+          <div class="img-container-block">
+            <img src="{{userData?.profilePic}}" width="150px" class="rounded-circle">
+          </div>
+
+          <div class="text-center">
+            <h3>Student Details</h3>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12 col-lg-12">
+              <table class="table table-user-information">
+                <tbody>
+                  <tr>
+                    <td class="strong"><strong>Matric. No</strong></td>
+                    <td>{{userData?.matNo}}</td>
+                  </tr>
+
+                  <tr>
+                    <td><strong>First Name</strong></td>
+                    <td>{{userData?.firstName}}</td>
+                  </tr>
+
+                  <tr>
+                    <td><strong>Last Name</strong></td>
+                    <td>{{userData?.lastName}}</td>
+                  </tr>
+
+                  <tr>
+                    <td><strong>Email</strong></td>
+                    <td>{{userData?.email}}</td>
+                  </tr>
+
+                  <tr>
+                    <td><strong>Phone</strong></td>
+                    <td>{{userData?.phone}}</td>
+                  </tr>
+
+                  <tr>
+                    <td><strong>Faculty</strong></td>
+                    <td>{{userData?.faculty?.name}}</td>
+                  </tr>
+
+
+
+
+                </tbody>
+              </table>
+            </div>
+
+
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<div class="container-fluid mt-5 d-flex justify-content-center">
+
+  <div class="row">
+    <div class="col-md-6 mt-3" *ngFor="let list of candidateList;let i=index">
+      <div class="card p-3">
+        <div class="d-flex align-items-center">
+          <div cass="image"> <img src="{{list.image}}" class="rounded" width="155"> </div>
+          <div class="ml-3 w-100">
+            <h5 class="mb-0 mt-0">{{list.user?.firstName}} {{list.user?.lastName}}</h5>
+            <h5><span class="badge badge-success p-2">{{list.position?.title}}</span></h5>
+
+            <div class="p-2 mt-2 bg-primary d-flex justify-content-between rounded text-white stats">
+              <h6><i>{{list.manifesto}}</i></h6>
+            </div>
+            <div class="button mt-2 d-flex flex-row align-items-center">
+              <button class="btn btn-sm btn-primary w-100">Details</button>
+              <button (click)="deleteById(list.id)" class="btn btn-sm btn-danger w-100 ml-2">Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="square-loader" [fullScreen]="true">
+  <p style="color: white"> Loading... </p>
+</ngx-spinner>
